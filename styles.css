@@ -1,0 +1,137 @@
+.centerContainer
+{
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top:50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    
+}
+
+.centerRow
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rectangle
+{
+    width: 60px;
+    height: 60px;
+    background-color: #ffcc00;
+    opacity: 0.5;
+
+    margin: 5px;
+    border: 5px solid transparent;
+    border-collapse: collapse;
+    border-radius: 10px;
+    
+    justify-content: center;
+    align-items: center;
+    
+    display: flex;
+
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.button
+{
+    width: 30px;
+    height: 30px;
+    background-color: #ffcc00;
+    opacity: 0.5;
+    color:black;
+
+    text-align: center;
+
+    margin: 5px;
+    border: 5px solid transparent;
+    border-collapse: collapse;
+    border-radius: 512px;
+    
+    justify-content: center;
+    align-items: center;
+    
+    display: flex;
+
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.bar
+{
+    width : 40px;
+    height : 200px;
+    background-color: #ffcc00;
+
+    margin: 5px;
+    border: 0px solid transparent;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+.blank
+{
+    width: 60px;
+    height: 60px;
+
+    margin: 10px;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    animation: fadeOut 2s ease-out forwards;
+
+    z-index: -1;
+    filter: blur(10px); /* Smooth out the edges */
+}
+
+.settingsBox
+{
+    max-height:500px;
+    max-width: 910px;
+    
+    
+    border-radius: 16px;
+    padding: 16px;
+    margin:8px;
+    
+    font-size: 16px;
+    text-align: left;
+
+    background-color: rgba(192,192,192,0.1);
+}
+
+input {
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    width: 50px;
+    background-color: rgba(96,96,96,0);
+    color:#666;
+}
+
+select {
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    background-color:rgba(96,96,96,0);
+    width: 50px;
+    color:#666
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
