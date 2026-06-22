@@ -37,7 +37,7 @@ var GLOBAL_aud_nodePointer;
 var GLOBAL_performance_pinA = performance.now();
 var GLOBAL_performance_pinB = performance.now();
 
-var GLOBAL_record_size = 32;
+var GLOBAL_record_size = 8;
 var GLOBAL_record_list = []
 var GLOBAL_record_lastTime = performance.now()
 
