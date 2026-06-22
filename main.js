@@ -10,7 +10,7 @@ const mainButton = POwO_docgetel("mainButton");
 const field_met_text = POwO_docgetel("field_metronome_text")
 
 const field_met_interval = POwO_docgetel("field_metronome_interval")
-const field_met_pos_cur = POwO_docgetel("field_metronome_pos_cur")
+const field_met_timePrint = POwO_docgetel("field_metronome_timePrint")
 const field_met_pos_full = POwO_docgetel("field_metronome_pos_full")
 
 const field_met_playPause = POwO_docgetel("field_metronome_playPause")
@@ -29,6 +29,9 @@ var GLOBAL_met_javascriptInterval;
 
 var GLOBAL_aud_buffer_stone;
 var GLOBAL_aud_nodePointer;
+
+var GLOBAL_performance_pinA = performance.now();
+var GLOBAL_performance_pinB = performance.now();
 
 
 // ---- ---- ---- ---- ON START
@@ -92,34 +95,43 @@ function POwO_metronome_playPause()
     if (field_met_playPause.innerText === "play")
     {
         POwO_metronome_config()
+        GLOBAL_performance_pinA = performance.now()
+        GLOBAL_performance_pinB = performance.now()
         GLOBAL_met_pos_cur = GLOBAL_met_pos_full - 1;
         GLOBAL_met_interval_cur = 0;
         GLOBAL_met_javascriptInterval = setInterval(() =>
         {
+            //what is deltaTime ?
+            GLOBAL_performance_pinA = GLOBAL_performance_pinB
+            GLOBAL_performance_pinB = performance.now()
+            let temp_deltaTime = GLOBAL_performance_pinB - GLOBAL_performance_pinA
 
             //play sound and light button
-            if (GLOBAL_met_interval_cur < GLOBAL_met_interval_full)
+            if ( GLOBAL_met_interval_cur < GLOBAL_met_interval_full)
             {
-                GLOBAL_met_interval_cur++
+                GLOBAL_met_interval_cur += temp_deltaTime
             }
             else
             {
-                GLOBAL_met_interval_cur = 0
-                POwO_playSound(0)
-                
-                if (GLOBAL_met_pos_cur < GLOBAL_met_pos_full - 1)
+                while(GLOBAL_met_interval_cur >= GLOBAL_met_interval_full)
                 {
-                    GLOBAL_met_pos_cur++
-                }
-                else
-                {
-                    GLOBAL_met_pos_cur = 0
-                    POwO_playSound(1)
+                    GLOBAL_met_interval_cur -= GLOBAL_met_interval_full
+                    POwO_playSound(0)
+
+                    if (GLOBAL_met_pos_cur < GLOBAL_met_pos_full - 1)
+                    {
+                        GLOBAL_met_pos_cur++
+                    }
+                    else
+                    {
+                        GLOBAL_met_pos_cur = 0
+                        POwO_playSound(1)
+                    }
                 }
             }
 
             //print text
-            field_met_pos_cur.innerText = GLOBAL_met_pos_cur
+            field_met_timePrint.innerText = GLOBAL_met_interval_cur + " / " + GLOBAL_met_pos_cur
 
             //dim button
             if (mainButton.style.opacity > GLOBAL_colorOFF){ mainButton.style.opacity -= 0.01 }

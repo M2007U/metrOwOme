@@ -10,18 +10,18 @@
 <body style="font-family:Calibri, Consolas, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;background-color: black;">
     <div class="centerContainer">
         <div class="centerRow">
-            <div id="mainButton" class="rectangle" style="width:400px;height:400px;font-size:48px;border-radius:32px;text-align:center;">CLICK me <br> or <br> hit ENTER</div>
+            <div id="mainButton" class="rectangle" style="width:300px;height:300px;font-size:48px;border-radius:32px;text-align:center;">CLICK me <br> or <br> hit ENTER</div>
         </div>
         
         <div style="height: 64px;"></div>
 
-        <div class="settingsBox" style="color:white;height:fit-content">
+        <div class="settingsBox" style="color:white;height:fit-content;width:300px">
             <font style="font-size:25px;"> Metronome </font>
             <br><br>
             <div style="display:flex;" >
                 <div style="width:50%;padding-right: 16px;">
                     interval (ms) :<br><input id="field_metronome_interval" value="200" style="font-size: 25px;"><br><br>
-                    current time position :<br><font id="field_metronome_pos_cur" style="font-size: 25px;">0</font> <br><br>
+                    current interval/beat position :<br><font id="field_metronome_timePrint" style="font-size: 25px;">0</font> <br><br>
                     beats/cycle :<br><input id="field_metronome_pos_full" value="4" style="font-size: 25px;"><br><br>
                     <div id="field_metronome_playPause" class="button" style="width:64px" onclick="POwO_metronome_playPause()" >play</div>
                 </div>
