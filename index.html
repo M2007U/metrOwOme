@@ -10,26 +10,29 @@
 <body style="font-family:Calibri, Consolas, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;background-color: black;">
     <div class="centerContainer">
         <div class="centerRow">
-            <div id="mainButton" class="rectangle" style="width:300px;height:300px;font-size:48px;border-radius:32px;text-align:center;">CLICK me <br> or <br> hit ENTER</div>
+            <div id="mainButton" style="background-color:#ffcc00;display:flex;flex-direction:column;justify-content:center; align-items: center; width:300px;height:300px;font-size:48px;border-radius:32px;text-align:center;">CLICK me <br> or <br> hit ENTER</div>
         </div>
         
         <div style="height: 64px;"></div>
 
-        <div class="settingsBox" style="color:white;height:fit-content;width:300px">
+        <div class="settingsBox" style="color:white;height:fit-content;width:512px;max-height:1024px;">
             <font style="font-size:25px;"> Metronome </font>
             <br><br>
             <div style="display:flex;" >
-                <div style="width:50%;padding-right: 16px;">
+                <div style="width:60%;padding-right: 16px;">
                     interval (ms) :<br><input id="field_metronome_interval" value="200" style="font-size: 25px;"><br><br>
                     current interval/beat position :<br><font id="field_metronome_timePrint" style="font-size: 25px;">0</font> <br><br>
                     beats/cycle :<br><input id="field_metronome_pos_full" value="4" style="font-size: 25px;"><br><br>
-                    <div id="field_metronome_playPause" class="button" style="width:64px" onclick="POwO_metronome_playPause()" >play</div>
+                    <div id="field_metronome_playPause" class="button" style="width:128px" onclick="POwO_metronome_playPause()" >play</div>
                 </div>
                 <div style="background-color:white;width:1px;"></div>
-                <div style="width:50%;padding-left:16px">
+                <div style="width:40%;height:fit-content;padding-left:16px">
+                    record size :<br><input id="field_metronome_RecordSize" value="32" style="font-size: 25px;"><br><br>
+                    <div id="field_metronome_RecordSetSize" class="button" style="width:128px" onclick="POwO_metronome_RecordSetSize()" >set Record Size</div>
                     recorded intervals : <br>
-                    <font id="field_metronome_recordList"></font><br><br>
-                    <div id="field_metronome_clearRecord" class="button" style="width:64px" onclick="POwO_metronome_clearRecord()" >clear record</div>
+                    <font id="field_metronome_recordList" style="white-space: pre-wrap;"></font><br><br>
+                    <div id="field_metronome_RecordPop" class="button" style="width:128px" onclick="POwO_metronome_RecordPop()" >pop record</div>
+                    <div id="field_metronome_RecordClear" class="button" style="width:128px" onclick="POwO_metronome_RecordClear()" >clear record</div>
                 </div>
             </div>            
         </div>

@@ -15,6 +15,10 @@ const field_met_pos_full = POwO_docgetel("field_metronome_pos_full")
 
 const field_met_playPause = POwO_docgetel("field_metronome_playPause")
 
+const field_met_recordSize = POwO_docgetel("field_metronome_RecordSize")
+const field_met_recordPrint = POwO_docgetel("field_metronome_recordList")
+
+
 
 // ---- ---- ---- ---- prepare global objects
 
@@ -32,6 +36,10 @@ var GLOBAL_aud_nodePointer;
 
 var GLOBAL_performance_pinA = performance.now();
 var GLOBAL_performance_pinB = performance.now();
+
+var GLOBAL_record_size = 32;
+var GLOBAL_record_list = []
+var GLOBAL_record_lastTime = performance.now()
 
 
 // ---- ---- ---- ---- ON START
@@ -152,9 +160,70 @@ function POwO_metronome_playPause()
     
 }
 
-function POwO_metronome_clearRecord()
+function POwO_metronome_RecordSetSize()
 {
-    console.log("not yet")
+    GLOBAL_record_size = Number(field_met_recordSize.value)
+}
+
+function POwO_metronome_RecordPulse()
+{
+    GLOBAL_record_list.push( performance.now() - GLOBAL_record_lastTime )
+    GLOBAL_record_lastTime = performance.now()
+    while (GLOBAL_record_list.length > GLOBAL_record_size)
+    {
+        GLOBAL_record_list.shift()
+    }
+
+    POwO_metronome_RecordBPMCal()
+}
+
+function POwO_metronome_RecordClear()
+{
+    GLOBAL_record_list = []
+    POwO_metronome_RecordBPMCal()
+}
+
+function POwO_metronome_RecordPop()
+{
+    if (GLOBAL_record_list.length > 0)
+    {
+        GLOBAL_record_list.pop()
+    }
+
+    POwO_metronome_RecordBPMCal()
+}
+
+function POwO_metronome_RecordBPMCal()
+{
+    if (GLOBAL_record_list.length > 0)
+    {
+        field_met_recordPrint.textContent = ""
+        let tempSum = 0
+        for( let i = 0 ; i < GLOBAL_record_list.length ; i++ )
+        {
+            tempSum += GLOBAL_record_list[i]
+            field_met_recordPrint.textContent += "(" + i + ") : " + GLOBAL_record_list[i].toFixed(2) + "\n"
+        }
+
+        let tempAvg = tempSum / GLOBAL_record_list.length
+
+        let temp_HTML_bpm = document.createElement("div")
+        temp_HTML_bpm.style.fontSize = "48px"
+        temp_HTML_bpm.textContent = Number(60000 / tempAvg).toFixed(2) + " bpm"
+
+        let temp_HTML_ms = document.createElement("div")
+        temp_HTML_ms.style.fontSize = "25px"
+        temp_HTML_ms.textContent = tempAvg.toFixed(2) + " ms"
+
+        mainButton.replaceChildren()
+        mainButton.appendChild(temp_HTML_bpm)
+        mainButton.appendChild(temp_HTML_ms)
+
+    }
+    else
+    {
+        field_met_recordPrint.textContent = ""
+    }
 }
 
 
@@ -208,6 +277,7 @@ function POwO_RandomCircle
 document.addEventListener('keydown', (event) => {
     if (event.key = "Enter")
     {
+        POwO_metronome_RecordPulse()
         POwO_playSound(0)
     }
 
